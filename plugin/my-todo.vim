@@ -63,12 +63,18 @@ endfunction
 function! AddTodoTxt() abort
   let lines = getline(0, line('$'))
   for line in lines
+    if line == ''
+      return
+    endif
     exec '!t a '.line
   endfor
   exec ':bdelete'
 endfunction
 
 function! EditTodoTxt() abort
+    if getline('.') == ''
+      return
+    endif
   exec '!t replace '.getline('.')
   exec ':bdelete'
 endfunction
