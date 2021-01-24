@@ -83,3 +83,5 @@ autocmd FileType todo_txt_list call SetTodoTxtList()
 autocmd FileType todo_txt_add autocmd! BufWritePost <buffer> call AddTodoTxt()
 autocmd FileType todo_txt_edit autocmd! BufWritePost <buffer> call EditTodoTxt()
 
+command! ShowMyTodo call ShowMyTodo()
+
