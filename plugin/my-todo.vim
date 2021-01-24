@@ -3,19 +3,19 @@ if exists('g:loaded_my_todo')
 endif
 let g:loaded_my_todo = 1
 
+function! ReloadTodo() abort
+  exec '%!t ls'
+  exec ':w'
+endfunction
+
 function! DoneTodo() abort
   let cursor_line = getline('.')
   let todo_num = split(cursor_line, " ")[0]
-  if todo_num != 0
+  if todo_num == 0
     return
   endif
   exec '!t do '.todo_num
   call ReloadTodo()
-endfunction
-
-function! ReloadTodo() abort
-  exec '%!t ls'
-  exec ':w'
 endfunction
 
 function! DeleteTodo() abort
