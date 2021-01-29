@@ -2,6 +2,7 @@ if exists('g:loaded_my_todo')
   finish
 endif
 let g:loaded_my_todo = 1
+let s:todo_show_txt = $HOME.'/todo/todo_show'
 let s:todo_add_txt = $HOME.'/todo/todo_add'
 let s:todo_edit_txt = $HOME.'/todo/todo_edit'
 
@@ -56,7 +57,7 @@ function! SetTodoTxtList() abort
 endfunction
 
 function! ShowMyTodo() abort
-  new `=tempname()`
+  new todo_show_txt
   exec '%!t ls'
   exec ':w'
   set filetype=todo_txt_list
