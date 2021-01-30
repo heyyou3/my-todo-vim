@@ -2,9 +2,6 @@ if exists('g:loaded_my_todo')
   finish
 endif
 let g:loaded_my_todo = 1
-let s:todo_show_txt = $HOME.'/todo/todo_show'
-let s:todo_add_txt = $HOME.'/todo/todo_add'
-let s:todo_edit_txt = $HOME.'/todo/todo_edit'
 
 function! ReloadTodo() abort
   exec '%!t ls'
@@ -33,7 +30,7 @@ function! DeleteTodo() abort
 endfunction
 
 function! AddTodo() abort
-  exec ':vs '.todo_txt_add
+  exec ':vs '.$HOME.'/todo/todo_add'
   set filetype=todo_txt_add
 endfunction
 
@@ -43,7 +40,7 @@ function! EditTodo() abort
   if todo_num == 0
     return
   endif
-  exec ':vs '.todo_edit_txt
+  exec ':vs '.$HOME.'/todo/todo_edit'
   call setline(1, cursor_line)
   set filetype=todo_txt_edit
 endfunction
@@ -57,7 +54,7 @@ function! SetTodoTxtList() abort
 endfunction
 
 function! ShowMyTodo() abort
-  new todo_show_txt
+  exec 'new '.$HOME.'/todo/todo_show'
   exec '%!t ls'
   exec ':w'
   set filetype=todo_txt_list
@@ -71,7 +68,7 @@ function! AddTodoTxt() abort
     endif
     exec '!t a '.line
   endfor
-  exec ':!rm '.todo_add_txt
+  exec ':bdelete'
 endfunction
 
 function! EditTodoTxt() abort
@@ -79,7 +76,7 @@ function! EditTodoTxt() abort
       return
     endif
   exec '!t replace '.getline('.')
-  exec ':!rm '.todo_edit_txt
+  exec ':bdelete'
 endfunction
 
 autocmd FileType todo_txt_list call SetTodoTxtList()
